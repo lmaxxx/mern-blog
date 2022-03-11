@@ -4,7 +4,7 @@ const socialMediaStrategy = async (user, done) => {
   const currentUser = await User.findOne({uid: user.uid})
 
   if (!currentUser) {
-    const newUser = User.create(user)
+    const newUser = await User.create(user)
     return done(null, newUser)
   }
 
