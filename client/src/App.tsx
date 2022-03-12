@@ -3,6 +3,7 @@ import {Route, Routes} from "react-router-dom";
 import {IUser, IUserContext} from "../types/auth.types";
 import {useQuery} from "react-query";
 import authService from './services/authService'
+import Main from './pages/Main'
 
 export const UserContext = createContext<IUserContext>({} as IUserContext)
 
@@ -24,13 +25,15 @@ function App() {
     setUser
   }
 
-  console.log(userContextValue)
+  if(isLoading) {
+    return <p>Loading</p>
+  }
 
   return (
     <UserContext.Provider value={userContextValue}>
       <Routes>
-        {/*<Route path={"/"} element={}/>*/}
-        {/*<Route path={"/:id"} element={}/>*/}
+        <Route path={"/"} element={<Main/>}/>
+        <Route path={"/:id"} element={<Main/>}/>
         {/*<Route path={"/user"} element={}/>*/}
         {/*<Route path={"/admin"} element={}/>*/}
         {/*<Route path={"/admin/:id"} element={}/>*/}
