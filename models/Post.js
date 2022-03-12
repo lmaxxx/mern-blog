@@ -5,7 +5,8 @@ const postSchema = new Schema({
   picture: String,
   creator: Schema.Types.ObjectId,
   creationDate: {type: Number, default: Date.now()},
-  comments: {type: Schema.Types.ObjectId, ref: "Comment"},
+  lastUpdated: {type: Number, default: Date.now()},
+  comments: [{type: Schema.Types.ObjectId, ref: "Comment", default: []}],
   template: {
     main: [{type: Schema.Types.ObjectId, ref: "TemplateItem"}],
     leftSidebar: [{type: Schema.Types.ObjectId, ref: "TemplateItem"}],
