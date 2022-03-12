@@ -1,8 +1,8 @@
-import {useRef} from 'react'
+import {useContext} from 'react'
 import {UserContext} from "../App";
 
 const useUser = () => {
-  return useRef(UserContext)
+  return useContext(UserContext);
 }
 
 export default useUser
