@@ -8,7 +8,7 @@ const conntectDb = require("./db/connectDb")
 const passport = require("passport");
 const session = require("express-session")
 const authRouter = require("./routes/authRoutes")
-const {logout} = require("./controllers/authController");
+const {logout, getUser} = require("./controllers/authController");
 const postRoutes = require("./routes/postRoutes")
 const {getAllPosts} = require("./controllers/postController");
 
@@ -23,7 +23,6 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
-
 app.use("/api/auth", authRouter)
 app.use("/api/post", postRoutes)
 
@@ -33,6 +32,7 @@ app.get("/", (req, res) => {
 
 app.get("/api/posts", getAllPosts)
 app.get("/api/logout", logout)
+app.get("/api/user", getUser)
 
 const start = async () => {
   try {
