@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {IUserResponse} from "../types/auth.types";
+import {AuthProvider, IUserResponse} from "../types/auth.types";
 
 const authService = {
   getUser() {
@@ -8,6 +8,10 @@ const authService = {
 
   logout() {
     return axios.get<IUserResponse>("/api/logout")
+  },
+
+  auth(provider: AuthProvider) {
+    window.open(`http://localhost:8080/api/auth/${provider}`, "_self")
   }
 }
 

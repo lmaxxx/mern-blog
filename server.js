@@ -26,10 +26,6 @@ app.use(passport.session())
 app.use("/api/auth", authRouter)
 app.use("/api/post", postRoutes)
 
-app.get("/", (req, res) => {
-  res.json(req.user)
-})
-
 app.get("/api/posts", getAllPosts)
 app.get("/api/logout", logout)
 app.get("/api/user", getUser)

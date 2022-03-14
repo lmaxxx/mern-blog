@@ -1,13 +1,15 @@
 import useUser from './useUser'
 import authService from "../services/authService";
 import {useQuery} from "react-query";
-import {toast, useToast} from "@chakra-ui/react";
+import {useToast} from "@chakra-ui/react";
+import {AuthProvider} from "../types/auth.types";
+import globalService from '../services/globalService'
 
-const useAuth = () => {
+const useAuth = (provider?: AuthProvider) => {
   const {setIsAuthenticated, setUser} = useUser()
   const toast = useToast()
 
-  const {refetch} = useQuery("logout", () => authService.logout(), {
+  const {refetch: logout} = useQuery("logout", () => authService.logout(), {
     onSuccess({data}) {
       setIsAuthenticated(data.isAuthenticated)
       setUser(data.user)
@@ -31,7 +33,10 @@ const useAuth = () => {
     enabled: false
   })
 
-  return {logout: refetch}
+  return {
+    logout: globalService.hof(logout),
+    auth: globalService.hof(authService.auth.bind(null, provider!))
+  }
 }
 
 export default useAuth

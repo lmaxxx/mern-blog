@@ -15,3 +15,5 @@ export interface IUserResponse {
   user: IUser
   isAuthenticated: boolean
 }
+
+export type AuthProvider = "google" | "github"
