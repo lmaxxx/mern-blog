@@ -1,9 +1,12 @@
 import classes from './UserBar.module.scss'
 import {Avatar, Menu, MenuButton, MenuItem, MenuList} from "@chakra-ui/react";
 import useUser from "../../hooks/useUser";
+import useAuth from "../../hooks/useAuth";
+import globalService from "../../services/globalService";
 
 const UserBar = () => {
   const {user} = useUser()
+  const {logout} = useAuth()
 
   return (
     <div className={classes.UserBar}>
@@ -18,7 +21,7 @@ const UserBar = () => {
           <MenuItem>{user.login}</MenuItem>
           <MenuItem>My posts</MenuItem>
           <MenuItem>Settings</MenuItem>
-          <MenuItem>Logout</MenuItem>
+          <MenuItem onClick={globalService.hof(logout)}>Logout</MenuItem>
         </MenuList>
       </Menu>
     </div>
