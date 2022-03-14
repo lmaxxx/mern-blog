@@ -8,6 +8,7 @@ export interface IUserContext {
   user: IUser
   setUser: (user: IUser) => void
   isAuthenticated: boolean
+  setIsAuthenticated: (status: boolean) => void
 }
 
 export interface IUserResponse {

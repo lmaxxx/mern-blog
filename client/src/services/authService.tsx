@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {IUserResponse} from "../../types/auth.types";
+import {IUserResponse} from "../types/auth.types";
 
 const authService = {
   getUser() {

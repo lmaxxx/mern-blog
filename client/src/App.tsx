@@ -1,6 +1,6 @@
 import {createContext, useState} from 'react';
 import {Route, Routes} from "react-router-dom";
-import {IUser, IUserContext} from "../types/auth.types";
+import {IUser, IUserContext} from "./types/auth.types";
 import {useQuery} from "react-query";
 import authService from './services/authService'
 import Main from './pages/Main'
@@ -22,7 +22,8 @@ function App() {
   const userContextValue: IUserContext = {
     user,
     isAuthenticated,
-    setUser
+    setIsAuthenticated,
+    setUser,
   }
 
   if(isLoading) {
