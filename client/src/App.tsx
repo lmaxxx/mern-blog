@@ -30,8 +30,6 @@ function App() {
     }
   })
 
-  console.log(user)
-
   const userContextValue: IUserContext = {
     user,
     isAuthenticated,
