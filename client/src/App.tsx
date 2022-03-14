@@ -4,7 +4,8 @@ import {IUser, IUserContext} from "./types/auth.types";
 import {useQuery} from "react-query";
 import authService from './services/authService'
 import Main from './pages/Main'
-import {useToast} from "@chakra-ui/react";
+import {Center, useToast} from "@chakra-ui/react";
+import { CircularProgress } from '@chakra-ui/react'
 
 export const UserContext = createContext<IUserContext>({} as IUserContext)
 
@@ -38,7 +39,11 @@ function App() {
   }
 
   if(isLoading) {
-    return <p>Loading</p>
+    return (
+      <Center width={"100%"} height={"100vh"}>
+        <CircularProgress isIndeterminate/>
+      </Center>
+    )
   }
 
   return (
