@@ -2,7 +2,7 @@ import classes from './UserBar.module.scss'
 import {Avatar, Menu, MenuButton, MenuItem, MenuList} from "@chakra-ui/react";
 import useUser from "../../hooks/useUser";
 import useAuth from "../../hooks/useAuth";
-
+import {Link} from "react-router-dom";
 
 const UserBar = () => {
   const {user} = useUser()
@@ -20,7 +20,11 @@ const UserBar = () => {
         <MenuList>
           <MenuItem>{user.login}</MenuItem>
           <MenuItem>My posts</MenuItem>
-          <MenuItem>Settings</MenuItem>
+          <Link to={"/settings"}>
+            <MenuItem>
+                Settings
+            </MenuItem>
+          </Link>
           <MenuItem onClick={logout}>Logout</MenuItem>
         </MenuList>
       </Menu>

@@ -35,7 +35,7 @@ const useAuth = (provider?: AuthProvider) => {
 
   return {
     logout: globalService.hof(logout),
-    auth: globalService.hof(authService.auth.bind(null, provider!))
+    auth: authService.auth.bind(null, provider!)
   }
 }
 

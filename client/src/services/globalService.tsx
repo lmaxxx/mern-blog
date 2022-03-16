@@ -1,5 +1,5 @@
 const globalService = {
-  hof(callback: (...rest: any) => any) {
+  hof(callback: (...args: any[]) => any) {
     return callback
   }
 }

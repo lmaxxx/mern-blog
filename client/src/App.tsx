@@ -6,6 +6,7 @@ import authService from './services/authService'
 import Main from './pages/Main'
 import {Center, useToast} from "@chakra-ui/react";
 import { CircularProgress } from '@chakra-ui/react'
+import Settings from "./pages/Settings";
 
 export const UserContext = createContext<IUserContext>({} as IUserContext)
 
@@ -50,7 +51,8 @@ function App() {
     <UserContext.Provider value={userContextValue}>
       <Routes>
         <Route path={"/"} element={<Main/>}/>
-        <Route path={"/:id"} element={<Main/>}/>
+        <Route path={"/settings"} element={<Settings/>}/>
+        {/*<Route path={"/:id"} element={<Main/>}/>*/}
         {/*<Route path={"/user"} element={}/>*/}
         {/*<Route path={"/admin"} element={}/>*/}
         {/*<Route path={"/admin/:id"} element={}/>*/}

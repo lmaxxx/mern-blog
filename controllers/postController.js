@@ -22,7 +22,7 @@ const getPost = async (req, res) => {
 const createPost = async (req, res) => {
   try {
     const {title, picture, template} = req.body
-    const newPost = await postServices.createPost(title, picture, template, req.user._id)
+    const newPost = await postServices.createPost(title, picture, template, req.user?._id)
     res.json({newPost})
   } catch(err) {
     res.status(400).json({msg: err.message})

@@ -2,6 +2,7 @@ export interface IUser {
   login: string
   uid: number
   picture: string
+  _id: string
 }
 
 export interface IUserContext {
