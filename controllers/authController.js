@@ -11,19 +11,4 @@ const logout = (req, res) => {
   }
 }
 
-const getUser = (req, res) => {
-  try {
-    const userObj = {
-      isAuthenticated: true,
-      user: req.user
-    }
-
-    if(!req.user) userObj.isAuthenticated = false
-
-    res.json(userObj)
-  } catch(err) {
-    res.status(401).json({msg: err.message})
-  }
-}
-
-module.exports = {logout, getUser}
+module.exports = {logout}
