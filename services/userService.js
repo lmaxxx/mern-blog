@@ -6,6 +6,14 @@ const userService = {
     const updatedUser = await User.findById(userId)
 
     return updatedUser
+  },
+
+  async updateLogin(userId, newLogin) {
+    await User.findByIdAndUpdate(userId, {login: newLogin})
+    const updatedUser = await User.findById(userId)
+
+    return updatedUser
   }
 }
+
 module.exports = userService

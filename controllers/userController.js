@@ -7,7 +7,7 @@ const deletePicture = async (req, res) => {
     const updatedUser = await userService.deletePicture(_id)
 
     res.json({isAuthenticated: true, user: updatedUser})
-  } catch(err) {
+  } catch (err) {
     res.status(500).json({msg: err.message})
   }
 }
@@ -19,12 +19,36 @@ const getUser = (req, res) => {
       user: req.user
     }
 
-    if(!req.user) userObj.isAuthenticated = false
+    if (!req.user) userObj.isAuthenticated = false
 
     res.json(userObj)
-  } catch(err) {
+  } catch (err) {
     res.status(401).json({msg: err.message})
   }
 }
 
-module.exports = {deletePicture, getUser}
+const updateLogin = async (req, res) => {
+  try {
+    const {login} = req.body
+    const {_id} = req.user
+
+    const updatedUser = await userService.updateLogin(_id, login)
+
+    res.json({isAuthenticated: true, user: updatedUser})
+  } catch (err) {
+    res.status(500).json({msg: err.message})
+  }
+}
+
+const uploadPicture = (req, res) => {
+  try {
+    const {file} = req;
+    const {id} = file;
+
+    return res.json({id});
+  } catch (err) {
+    res.status(500).json({msg: err.message})
+  }
+}
+
+module.exports = {deletePicture, getUser, updateLogin, uploadPicture}
