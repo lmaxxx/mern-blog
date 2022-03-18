@@ -1,0 +1,13 @@
+.FileDnD {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(203, 213, 224, .7);
+  border: 8px dashed #ccc;
+  margin: 2rem;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+}

@@ -18,7 +18,7 @@ const useAuth = (provider?: AuthProvider) => {
         description: "You've logged out",
         status: "success",
         isClosable: true,
-        duration: 5000,
+        duration: 4000,
       })
     },
     onError() {
@@ -27,7 +27,7 @@ const useAuth = (provider?: AuthProvider) => {
         description: "Something went wrong when you've tried to log out",
         status: "error",
         isClosable: true,
-        duration: 5000,
+        duration: 4000,
       })
     },
     enabled: false

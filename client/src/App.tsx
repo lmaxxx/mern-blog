@@ -23,7 +23,7 @@ function App() {
             description: "You've logged in",
             status: "success",
             isClosable: true,
-            duration: 5000,
+            duration: 4000,
           })
         }
         setIsAuthenticated(data.isAuthenticated)
