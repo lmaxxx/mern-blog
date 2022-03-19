@@ -3,15 +3,25 @@ import {IUserResponse} from "../types/auth.types";
 
 const settingService = {
   deletePicture() {
-    return axios.patch<IUserResponse>("/api/user/deletePicture")
+    return axios.delete<IUserResponse>("/api/user/picture")
   },
 
   updateLogin(login: string) {
     return axios({
       method: "PATCH",
-      url: "api/user/updateLogin",
+      url: "api/user/login",
       data: {
         login
+      }
+    })
+  },
+
+  updatePicture(picture: string) {
+    return axios({
+      method: "PATCH",
+      url: "api/user/picture",
+      data: {
+        picture
       }
     })
   },

@@ -4,14 +4,22 @@ import {ChangeEvent, useState} from 'react'
 import useUser from "../../hooks/useUser";
 import useSettings from "../../hooks/useSettings";
 import settingService from "../../services/settingService";
+import globalService from "../../services/globalService";
 
 const SettingsForm = () => {
   const {user} = useUser()
   const [newLogin, setNewLogin] = useState<string>(user?.login)
-  const {deletePicture, updateLogin} = useSettings(newLogin)
+  const {deletePicture, updateLogin, updatePicture} = useSettings({newLogin})
 
   const setLogin = (e: ChangeEvent<HTMLInputElement>) => {
     setNewLogin(e.target.value)
+  }
+
+  const uploadFile = async (e: any) => {
+    const file = e.target.files[0]
+
+    const {picture} = await globalService.uploadPicture(file)
+    updatePicture(picture)
   }
 
   return (
@@ -28,7 +36,13 @@ const SettingsForm = () => {
         onClick={updateLogin}
         disabled={settingService.validateLogin(newLogin, user?.login)}
       >Update login</Button>
-      <input id={"file"} accept={"image/*"} type="file" hidden/>
+      <input
+        name={"picture"}
+        onChange={uploadFile}
+        id={"file"}
+        accept={"image/*"}
+        type="file"
+        hidden/>
       <label htmlFor={"file"}>
           <Button
             as={"div"}

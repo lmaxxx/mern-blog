@@ -4,7 +4,11 @@ import settingService from "../services/settingService";
 import globalService from "../services/globalService";
 import {useToast} from "@chakra-ui/react";
 
-const useSettings = (login?: string) => {
+interface paramsType {
+  newLogin?: string
+}
+
+const useSettings = ({newLogin}: paramsType) => {
   const {setUser} = useUser()
   const toast = useToast()
 
@@ -22,7 +26,7 @@ const useSettings = (login?: string) => {
     enabled: false
   })
 
-  const {refetch: updateLogin} = useQuery(["update login", login], () => settingService.updateLogin(login!), {
+  const {refetch: updateLogin} = useQuery(["update login", newLogin], () => settingService.updateLogin(newLogin!), {
     onSuccess({data}) {
       setUser(data.user)
       toast({
@@ -36,9 +40,22 @@ const useSettings = (login?: string) => {
     enabled: false
   })
 
+  const updatePicture = async (newPicture: string) => {
+    const {data} = await settingService.updatePicture(newPicture)
+    setUser(data.user)
+    toast({
+      title: `Success 😁`,
+      description: "You've updated your picture",
+      status: "success",
+      isClosable: true,
+      duration: 4000,
+    })
+  }
+
   return {
     deletePicture: globalService.hof(deletePicture),
-    updateLogin: globalService.hof(updateLogin)
+    updateLogin: globalService.hof(updateLogin),
+    updatePicture
   }
 }
 

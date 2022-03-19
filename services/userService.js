@@ -13,6 +13,13 @@ const userService = {
     const updatedUser = await User.findById(userId)
 
     return updatedUser
+  },
+
+  async updatePicture(userId, newPicture) {
+    await User.findByIdAndUpdate(userId, {picture: newPicture})
+    const updatedUser = await User.findById(userId)
+
+    return updatedUser
   }
 }
 

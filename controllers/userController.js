@@ -40,15 +40,16 @@ const updateLogin = async (req, res) => {
   }
 }
 
-const uploadPicture = (req, res) => {
+const updatePicture = async (req, res) => {
   try {
-    const {file} = req;
-    const {id} = file;
+    const {picture} = req.body
+    const {_id} = req.user
 
-    return res.json({id});
+    const updatedUser = await userService.updatePicture(_id, picture)
+    res.json({isAuthenticated: true, user: updatedUser})
   } catch (err) {
-    res.status(500).json({msg: err.message})
+    res.status(400).json({msg: err.message})
   }
 }
 
-module.exports = {deletePicture, getUser, updateLogin, uploadPicture}
+module.exports = {deletePicture, getUser, updateLogin, updatePicture}

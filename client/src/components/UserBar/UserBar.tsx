@@ -15,6 +15,7 @@ const UserBar = () => {
           <Avatar
             name={user.login}
             src={user.picture}
+            bgColor={"initial"}
           />
         </MenuButton>
         <MenuList>
