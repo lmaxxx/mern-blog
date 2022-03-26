@@ -6,13 +6,14 @@ import {Avatar, Center} from "@chakra-ui/react";
 import SettingsForm from "../components/SettingsForm/SettingsForm";
 import FileDnD from "../components/FileDnD/FileDnD";
 import {useDropzone} from "react-dropzone";
-import globalService from "../services/globalService";
 import useSettings from "../hooks/useSettings";
+import useUpload from "../hooks/useUpload";
 
 const Settings = () => {
   const {isAuthenticated, user} = useUser()
   const navigate = useNavigate()
-  const {updatePicture} = useSettings({})
+  const {updatePicture} = useSettings()
+  const {upload, data: file} = useUpload()
   const {getRootProps, getInputProps, isDragActive, acceptedFiles} = useDropzone(
     {noKeyboard: true,
       noClick: true,
@@ -20,12 +21,11 @@ const Settings = () => {
       maxFiles: 1
     })
 
-  const uploadFile = async () => {
-    const file = acceptedFiles[0]
-
-    const {picture} = await globalService.uploadPicture(file)
-    updatePicture(picture)
-  }
+  useEffect(() => {
+    if(file) {
+      updatePicture(file)
+    }
+  }, [file])
 
   useEffect(() => {
     if(!isAuthenticated) {
@@ -35,7 +35,7 @@ const Settings = () => {
 
   useEffect(() => {
     if(acceptedFiles.length > 0) {
-      uploadFile()
+      upload(acceptedFiles[0])
     }
   }, [acceptedFiles])
 

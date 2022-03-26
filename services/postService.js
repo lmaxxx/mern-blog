@@ -21,7 +21,7 @@ const createPost = async (title, picture, template, creatorId) => {
     title,
     picture,
     template,
-    creator: "622fbe0667f490cc327e2722",//creatorId,
+    creator: "6236fa65dfe96867a4c11902",//creatorId,
   }
 
   const newPost = await Post.create(postOptions)

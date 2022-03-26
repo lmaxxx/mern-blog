@@ -1,8 +1,11 @@
 import classes from './PostCard.module.scss'
 import {FC} from 'react'
 import {IPost} from "../../types/post.types";
-import {Box, Container, Heading, Image, Text} from "@chakra-ui/react";
+import {Box, Container, Heading, Image, Text, Icon} from "@chakra-ui/react";
 import {useNavigate} from "react-router-dom";
+import {AiOutlineUser} from 'react-icons/ai'
+import {BiCommentDetail} from 'react-icons/bi'
+import {MdDateRange} from 'react-icons/md'
 
 interface PropsType {
   post: IPost
@@ -21,10 +24,12 @@ const PostCard: FC<PropsType> = ({post}) => {
     <div className={classes.PostCard} onClick={goToPostPage.bind(this, post._id)}>
       <Box
         _hover={{
-          boxShadow: "0px 2px 6px rgba(0, 0, 0, .35)"
+          transform: "scale(1.03)"
         }}
-        boxShadow={"0px 2px 6px rgba(0, 0, 0, .2)"}
+        backgroundColor={"gray.50"}
         transition={".2s"}
+        borderRadius={"8px"}
+        border={"1px solid #F7FAFC"}
       >
         <Image
           objectFit={"cover"}
@@ -32,23 +37,38 @@ const PostCard: FC<PropsType> = ({post}) => {
           h={"300px"}
           src={post.picture}
           w={"100%"}
+          borderRadius={"8px"}
           alt={""}
         />
-        <Container borderTop={"0.1px solid rgba(0, 0, 0, .2)"} p={"1rem"}>
+        <Container color={"gray.600"}>
+          <Text
+            isTruncated
+            fontSize={"lg"}
+            alignItems={"center"}
+            display={"flex"}
+          >
+            <Icon as={AiOutlineUser}></Icon>
+            {post.creator.login}
+          </Text>
           <Heading
-            textAlign={"center"}
-            color={"gray.800"}
+            color={"gray.700"}
             fontWeight={"normal"}
           >{post.title}</Heading>
           <Text
+            alignItems={"center"}
+            display={"flex"}
+          >
+            <Icon as={MdDateRange}></Icon>
+            {date}
+          </Text>
+          <Text
+            alignItems={"center"}
+            display={"flex"}
             isTruncated
-            textAlign={"center"}
-            fontSize={"xl"}
-            p={".5rem 0"}
-            color={"red.500"}
-          >By {post.creator.login}</Text>
-          <Text textAlign={"center"}>{date}</Text>
-          <Text textAlign={"center"}>Comments {post.comments.length}</Text>
+          >
+            <Icon as={BiCommentDetail}></Icon>
+            {post.comments.length}
+          </Text>
         </Container>
       </Box>
     </div>

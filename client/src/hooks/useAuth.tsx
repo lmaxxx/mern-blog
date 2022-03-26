@@ -5,7 +5,7 @@ import {useToast} from "@chakra-ui/react";
 import {AuthProvider} from "../types/auth.types";
 import globalService from '../services/globalService'
 
-const useAuth = (provider?: AuthProvider) => {
+const useAuth = () => {
   const {setIsAuthenticated, setUser} = useUser()
   const toast = useToast()
 
@@ -35,7 +35,7 @@ const useAuth = (provider?: AuthProvider) => {
 
   return {
     logout: globalService.hof(logout),
-    auth: authService.auth.bind(null, provider!)
+    auth: (provider: AuthProvider) => authService.auth.bind(null, provider)
   }
 }
 

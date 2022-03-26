@@ -1,26 +1,33 @@
 import classes from './SettingsForm.module.scss'
 import {Input, Button} from '@chakra-ui/react'
-import {ChangeEvent, useState} from 'react'
+import {ChangeEvent, useEffect, useState} from 'react'
 import useUser from "../../hooks/useUser";
 import useSettings from "../../hooks/useSettings";
 import settingService from "../../services/settingService";
-import globalService from "../../services/globalService";
+import useUpload from "../../hooks/useUpload";
 
 const SettingsForm = () => {
   const {user} = useUser()
   const [newLogin, setNewLogin] = useState<string>(user?.login)
-  const {deletePicture, updateLogin, updatePicture} = useSettings({newLogin})
+  const {deletePicture, updateLogin, updatePicture} = useSettings()
+  const {data: file, upload, uploadProgess} = useUpload()
+
+  console.log(uploadProgess)
 
   const setLogin = (e: ChangeEvent<HTMLInputElement>) => {
     setNewLogin(e.target.value)
   }
 
-  const uploadFile = async (e: any) => {
+  const uploadHoF = (e: any) => {
     const file = e.target.files[0]
-
-    const {picture} = await globalService.uploadPicture(file)
-    updatePicture(picture)
+    upload(file)
   }
+
+  useEffect(() => {
+    if(file) {
+      updatePicture(file)
+    }
+  }, [file])
 
   return (
     <div className={classes.SettingsForm}>
@@ -33,12 +40,12 @@ const SettingsForm = () => {
       <Button
         w={"100%"}
         mt={".5rem"}
-        onClick={updateLogin}
+        onClick={updateLogin.bind(this, newLogin)}
         disabled={settingService.validateLogin(newLogin, user?.login)}
       >Update login</Button>
       <input
         name={"picture"}
-        onChange={uploadFile}
+        onChange={uploadHoF}
         id={"file"}
         accept={"image/*"}
         type="file"

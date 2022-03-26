@@ -5,21 +5,20 @@ import {AiFillGithub} from 'react-icons/ai'
 import useAuth from "../../hooks/useAuth";
 
 const AuthBar = () => {
-  const {auth: authWithGoogle} = useAuth("google")
-  const {auth: authWithGithub} = useAuth("github")
+  const {auth} = useAuth()
 
   return (
     <div className={classes.AuthBar}>
       <HStack>
         <Text>Log in with</Text>
         <Icon
-          onClick={authWithGoogle}
+          onClick={auth("google")}
           className={classes.AuthBarIcon}
           boxSize={"2rem"}
           as={FcGoogle}
         />
         <Icon
-          onClick={authWithGithub}
+          onClick={auth("github")}
           className={classes.AuthBarIcon}
           boxSize={"2rem"}
           as={AiFillGithub}

@@ -9,7 +9,7 @@ import PostCard from "../PostCard/PostCard";
 const PostList = () => {
   const [posts, setPosts] = useState<IPost[]>([])
 
-  const {} = useQuery("get posts", () => postService.getPosts(), {
+  const {} = useQuery("get posts", (elem) => postService.getPosts(), {
     onSuccess({data}) {
       setPosts(data)
     }
