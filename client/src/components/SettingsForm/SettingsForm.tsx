@@ -1,5 +1,5 @@
 import classes from './SettingsForm.module.scss'
-import {Input, Button} from '@chakra-ui/react'
+import {Input, Button, Progress} from '@chakra-ui/react'
 import {ChangeEvent, useEffect, useState} from 'react'
 import useUser from "../../hooks/useUser";
 import useSettings from "../../hooks/useSettings";
@@ -10,9 +10,7 @@ const SettingsForm = () => {
   const {user} = useUser()
   const [newLogin, setNewLogin] = useState<string>(user?.login)
   const {deletePicture, updateLogin, updatePicture} = useSettings()
-  const {data: file, upload, uploadProgess} = useUpload()
-
-  console.log(uploadProgess)
+  const {data: file, upload, uploadProgess, isUploading} = useUpload()
 
   const setLogin = (e: ChangeEvent<HTMLInputElement>) => {
     setNewLogin(e.target.value)
@@ -65,6 +63,7 @@ const SettingsForm = () => {
         colorScheme={"red"}
         disabled={settingService.validatePicture(user?.picture)}
       >Delete picture</Button>
+      {isUploading && <Progress isAnimated hasStripe value={uploadProgess} mt={3} w={"300px"}/>}
     </div>
   )
 }

@@ -1,17 +1,16 @@
 import {useState} from "react"
 import axios from "axios";
-import {Simulate} from "react-dom/test-utils";
 
 const useUpload = () => {
   const [data, setData] = useState<any>()
-  const [isLoading, setIsLoading] = useState<boolean>()
+  const [isUploading, setIsUploading] = useState<boolean>()
   const [error, setError] = useState<any>()
   const [uploadProgess, setUploadProgess] = useState<number>(0)
 
   const upload = async (file: File) => {
     try {
       setError({})
-      setIsLoading(true)
+      setIsUploading(true)
       setUploadProgess(0)
 
       const fd = new FormData()
@@ -25,17 +24,17 @@ const useUpload = () => {
       })
       setData(data.picture)
 
-      setIsLoading(false)
+      setIsUploading(false)
       setUploadProgess(0)
     } catch(err) {
-      setIsLoading(false)
+      setIsUploading(false)
       setUploadProgess(0)
       setError(err)
     }
   }
 
 
-  return {data, isLoading, error, upload, uploadProgess}
+  return {data, isUploading, error, upload, uploadProgess}
 }
 
 export default useUpload

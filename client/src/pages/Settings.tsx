@@ -2,7 +2,7 @@ import useUser from "../hooks/useUser";
 import {useNavigate} from "react-router-dom";
 import Navigation from "../components/Navigation/Navigation";
 import {useEffect} from "react";
-import {Avatar, Center} from "@chakra-ui/react";
+import {Avatar, Center, Progress} from "@chakra-ui/react";
 import SettingsForm from "../components/SettingsForm/SettingsForm";
 import FileDnD from "../components/FileDnD/FileDnD";
 import {useDropzone} from "react-dropzone";
@@ -13,7 +13,7 @@ const Settings = () => {
   const {isAuthenticated, user} = useUser()
   const navigate = useNavigate()
   const {updatePicture} = useSettings()
-  const {upload, data: file} = useUpload()
+  const {upload, data: file, isUploading, uploadProgess} = useUpload()
   const {getRootProps, getInputProps, isDragActive, acceptedFiles} = useDropzone(
     {noKeyboard: true,
       noClick: true,
@@ -50,8 +50,10 @@ const Settings = () => {
             src={user?.picture}
             bgColor={"initial"}
             size={"2xl"}
+            color={"#31A1F9"}
           />
           <SettingsForm/>
+          {isUploading && <Progress isAnimated hasStripe value={uploadProgess} mt={3} w={"300px"}/>}
           <input {...getInputProps()}/>
           {
             isDragActive && <FileDnD/>

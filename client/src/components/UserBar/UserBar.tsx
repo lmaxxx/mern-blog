@@ -16,6 +16,7 @@ const UserBar = () => {
             name={user.login}
             src={user.picture}
             bgColor={"initial"}
+            color={"#31A1F9"}
           />
         </MenuButton>
         <MenuList>
